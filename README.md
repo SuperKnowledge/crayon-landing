@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🖍️ Crayon - Create Your Own Apps
 
-## Getting Started
+> Vibe only, no code. A mobile-first platform for building mini apps for yourself and people you care about.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-14.2-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4)
+![Three.js](https://img.shields.io/badge/Three.js-0.160-000000)
+
+## ✨ Features
+
+- **Modern Minimal Design** - Clean, focused interface with subtle 3D elements
+- **Interactive 3D Crayon** - Elegant rotating crayon built with Three.js
+- **Mouse Trail Effects** - Subtle colorful trails that follow cursor/touch
+- **Email Waitlist** - Google Sheets integration for easy email collection
+- **Mobile-First** - Fully responsive and optimized for mobile devices
+- **Dark Mode** - Sophisticated dark theme with neon accents
+- **Performance Optimized** - Fast loading with lazy loading and code splitting
+
+## 🚀 Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.local.example .env.local
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📚 Documentation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [Setup Guide](./SETUP.md) - Complete setup and deployment instructions
+- [Google Sheets Integration](./SETUP.md#-google-sheets-integration-setup) - Email collection setup
+- [Vercel Deployment](./SETUP.md#-vercel-deployment) - Deploy to production
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **3D Graphics:** Three.js + React Three Fiber
+- **Animations:** Framer Motion
+- **Hosting:** Vercel
+- **Email Collection:** Google Sheets API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+crayon-landing/
+├── app/
+│   ├── layout.tsx         # Root layout with fonts
+│   ├── page.tsx          # Main landing page
+│   ├── globals.css       # Global styles
+│   └── api/
+│       └── waitlist/     # Email collection API
+├── components/
+│   ├── CrayonScene.tsx   # 3D crayon component
+│   ├── MouseTrail.tsx    # Interactive mouse effects
+│   └── WaitlistForm.tsx  # Email capture form
+├── public/               # Static assets
+└── lib/                  # Utility functions
+```
 
-## Deploy on Vercel
+## 🎨 Customization
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Colors
+Edit CSS variables in `app/globals.css`:
+- `--color-accent-1`: Primary accent (coral)
+- `--color-accent-2`: Secondary accent (purple)
+- `--color-accent-3`: Tertiary accent (yellow)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Typography
+Modify fonts in `app/layout.tsx` using Next.js font optimization
+
+### 3D Crayon
+Customize the crayon in `components/CrayonScene.tsx`:
+- Colors and materials
+- Rotation speed
+- Lighting setup
+
+## 🌐 Deployment
+
+Deploy to Vercel with one click:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/crayon-landing)
+
+Or follow the [deployment guide](./SETUP.md#-vercel-deployment)
+
+## 📄 License
+
+© 2025 Crayon AI, Inc. All rights reserved.
+
+## 📧 Support
+
+For questions or support: [support@crayon-ai.com](mailto:support@crayon-ai.com)
+
+---
+
+Built with ❤️ by Crayon AI, Inc.

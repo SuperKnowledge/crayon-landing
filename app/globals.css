@@ -1,26 +1,196 @@
+/* Tell Tailwind v4 where to scan for class usage when bundler integration is limited */
+@source "./**/*.{js,ts,jsx,tsx,mdx}";
+@source "../components/**/*.{js,ts,jsx,tsx,mdx}";
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --font-inter: 'Inter', sans-serif;
+    --font-space: 'Space Grotesk', monospace;
+    
+    /* Clean color palette - mostly monochrome with accent colors */
+    --color-background: 10 10 10;
+    --color-foreground: 250 250 250;
+    --color-muted: 115 115 115;
+    --color-accent-1: 255 98 87;  /* Coral/Red */
+    --color-accent-2: 120 119 255; /* Purple/Blue */
+    --color-accent-3: 255 206 84;  /* Yellow */
+    --color-glow: 147 51 234;      /* Purple glow */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    /* Define a subtle default border color without relying on Tailwind classes */
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  body {
+    background-color: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
+    min-height: 100vh;
+    font-family: var(--font-inter);
+  }
+  
+  /* Minimal form element baseline so layout looks correct even if utilities fail */
+  input[type="email"] {
+    display: block;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    color: rgb(var(--color-foreground));
+    backdrop-filter: blur(6px);
+  }
+  input[type="email"]::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  input[type="email"]:focus {
+    outline: none;
+    border-color: color-mix(in oklab, rgb(var(--color-accent-2)) 50%, transparent);
+    box-shadow: 0 10px 25px rgba(120, 119, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Dedicated class for the waitlist input for reliable layout */
+  .waitlist-input {
+    height: 56px; /* consistent height */
+    padding-right: 7rem; /* space for button */
+  }
+  .waitlist-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Waitlist form wrapper ensures reasonable width without Tailwind utilities */
+  .waitlist-form {
+    width: min(100%, 28rem);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .waitlist-form .submit-btn { position: absolute; right: 0.5rem; }
+  
+  /* Custom font utilities */
+  .font-display {
+    font-family: var(--font-space);
+  }
+}
+
+@layer utilities {
+  /* Glow effect for text */
+  .text-glow {
+    text-shadow: 
+      0 0 20px rgba(var(--color-glow), 0.5),
+      0 0 40px rgba(var(--color-glow), 0.3),
+      0 0 60px rgba(var(--color-glow), 0.2);
+  }
+  
+  /* Subtle glow for elements */
+  .glow {
+    box-shadow: 
+      0 0 20px rgba(var(--color-glow), 0.3),
+      0 0 40px rgba(var(--color-glow), 0.2);
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    background-image: linear-gradient(
+      to right,
+      rgb(var(--color-accent-1)),
+      rgb(var(--color-accent-2)),
+      rgb(var(--color-accent-3))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  /* Noise texture overlay for depth */
+  .noise {
+    position: relative;
+  }
+  
+  .noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.01) 2px,
+        rgba(255, 255, 255, 0.01) 4px
+      );
+    pointer-events: none;
+    opacity: 0.4;
+  }
+  
+  /* Mouse trail canvas */
+  .mouse-trail-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  /* Smooth transitions */
+  .transition-smooth {
+    transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+  }
+}
+
+/* Fallback layout helpers when utility classes are unavailable */
+.main-root {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.page-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(var(--color-background));
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--color-muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(var(--color-foreground));
+}
+
+/* Loading animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
