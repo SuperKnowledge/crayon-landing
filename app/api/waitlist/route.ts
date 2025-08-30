@@ -71,7 +71,6 @@ export async function POST(request: NextRequest) {
             userAgent,
             referrer,
           }),
-          // @ts-expect-error: node fetch supports AbortController signal
           signal: controller.signal,
         });
       } finally {

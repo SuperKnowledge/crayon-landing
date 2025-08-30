@@ -52,7 +52,7 @@ export default function MouseTrail() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
   const particlesRef = useRef<Array<Particle>>([]);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | null>(null);
   const lastMousePos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
