@@ -1,0 +1,22 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "5KCG9224X7.com.crayon-ai.crayon.app",
+        "paths": [
+          "/",
+          "/app/*",
+          "/clip/*",
+          "/u/*",
+          "/api/*"
+        ]
+      }
+    ]
+  },
+  "appclips": {
+    "apps": [
+      "5KCG9224X7.com.crayon-ai.crayon.app.Clip"
+    ]
+  }
+}
