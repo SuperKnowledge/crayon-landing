@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import MouseTrail from "@/components/MouseTrail";
 import WaitlistForm from "@/components/WaitlistForm";
 
@@ -108,6 +109,13 @@ export default function Home() {
           >
             support@crayon-ai.com
           </a>
+          <span className="hidden md:inline">•</span>
+          <Link 
+            href="/privacy-policy" 
+            className="hover:text-white/60 transition-colors"
+          >
+            Privacy Policy
+          </Link>
         </div>
       </motion.footer>
     </main>
