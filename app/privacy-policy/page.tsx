@@ -57,53 +57,32 @@ export default function PrivacyPolicy() {
           <section>
             <h2 className="text-2xl font-bold mb-4 text-white">Introduction</h2>
             <p className="mb-4">
-              At Crayon AI, Inc. ("Crayon", "we", "us", or "our"), we respect your privacy and are committed to protecting it through our compliance with this policy.
+              At Crayon AI, Inc. (&quot;Crayon&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), we respect your privacy and are committed to protecting it through our compliance with this policy.
             </p>
             <p>
-              This policy describes the types of information we may collect from you or that you may provide when you use our mobile application, Crayon (the "App"), and our practices for collecting, using, maintaining, protecting, and disclosing that information.
+              This policy describes the types of information we may collect from you or that you may provide when you use our mobile application, Crayon (the &quot;App&quot;), and our practices for collecting, using, maintaining, protecting, and disclosing that information.
             </p>
           </section>
           
           <section>
             <h2 className="text-2xl font-bold mb-4 text-white">Information We Collect</h2>
             <p className="mb-4">
-              We collect several types of information for various purposes to provide and improve our service to you:
+              We only collect your email address and name for login purposes. We do not collect any other personal information.
             </p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Personal Data:</strong> While using our App, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). This may include, but is not limited to, your email address and name.</li>
-              <li><strong>Usage Data:</strong> We may also collect information that your device sends whenever you use our App ("Usage Data"). This Usage Data may include information such as your device's Internet Protocol address (e.g. IP address), device model, operating system, the pages of our App that you visit, the time and date of your visit, the time spent on those pages, and other diagnostic data.</li>
-              <li><strong>Device Data:</strong> We may collect information about your device, including the hardware model, operating system and version, unique device identifiers, and mobile network information.</li>
-            </ul>
           </section>
           
           <section>
             <h2 className="text-2xl font-bold mb-4 text-white">Use of Data</h2>
             <p className="mb-4">
-              Crayon AI, Inc. uses the collected data for various purposes:
+              We only use your email address and name for login purposes.
             </p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>To provide and maintain our service</li>
-              <li>To notify you about changes to our service</li>
-              <li>To allow you to participate in interactive features of our service when you choose to do so</li>
-              <li>To provide customer support</li>
-              <li>To gather analysis or valuable information so that we can improve our service</li>
-              <li>To monitor the usage of our service</li>
-              <li>To detect, prevent, and address technical issues</li>
-            </ul>
           </section>
           
           <section>
             <h2 className="text-2xl font-bold mb-4 text-white">Data Sharing</h2>
-            <p className="mb-4">
-              We may share your personal information in the following situations:
+            <p>
+              We do not share your personal information with any third parties.
             </p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li><strong>With Service Providers:</strong> We may share your personal information with third-party service providers to monitor and analyze the use of our service.</li>
-              <li><strong>For Business Transfers:</strong> We may share or transfer your personal information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.</li>
-              <li><strong>With Affiliates:</strong> We may share your information with our affiliates, in which case we will require those affiliates to honor this Privacy Policy.</li>
-              <li><strong>With Business Partners:</strong> We may share your information with our business partners to offer you certain products, services or promotions.</li>
-              <li><strong>With Your Consent:</strong> We may disclose your personal information for any other purpose with your consent.</li>
-            </ul>
           </section>
           
           <section>
@@ -114,16 +93,16 @@ export default function PrivacyPolicy() {
           </section>
           
           <section>
-            <h2 className="text-2xl font-bold mb-4 text-white">Children's Privacy</h2>
+            <h2 className="text-2xl font-bold mb-4 text-white">Children&apos;s Privacy</h2>
             <p>
-              Our service does not address anyone under the age of 13 ("Children"). We do not knowingly collect personally identifiable information from anyone under the age of 13. If you are a parent or guardian and you are aware that your Child has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from children without verification of parental consent, we take steps to remove that information from our servers.
+              Our service does not address anyone under the age of 13 (&quot;Children&quot;). We do not knowingly collect personally identifiable information from anyone under the age of 13. If you are a parent or guardian and you are aware that your Child has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from children without verification of parental consent, we take steps to remove that information from our servers.
             </p>
           </section>
           
           <section>
             <h2 className="text-2xl font-bold mb-4 text-white">Changes to This Privacy Policy</h2>
             <p>
-              We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.
+              We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the &quot;Last updated&quot; date.
             </p>
           </section>
           

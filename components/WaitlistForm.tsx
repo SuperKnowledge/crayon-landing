@@ -45,7 +45,8 @@ export default function WaitlistForm() {
           setMessage("");
         }, 3000);
       }
-    } catch (error) {
+    } catch (error: unknown) {
+      console.error("Waitlist form error:", error);
       setStatus("error");
       setMessage("Network error. Please try again.");
       
