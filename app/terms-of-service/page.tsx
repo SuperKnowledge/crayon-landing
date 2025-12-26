@@ -2,11 +2,15 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import MouseTrail from "@/components/MouseTrail";
 import Footer from "@/components/Footer";
 
 export default function TermsOfService() {
   return (
     <main className="relative grid min-h-[100svh] grid-rows-[auto,1fr,auto] overflow-hidden noise main-root">
+      {/* Mouse trail effect */}
+      <MouseTrail />
+
       {/* Background gradient orbs - subtle and elegant (matching Privacy Policy) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[rgb(var(--color-accent-2))]/10 rounded-full blur-3xl" />
