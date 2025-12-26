@@ -76,7 +76,7 @@ export default function Home() {
           className="w-full max-w-md"
         >
           <p className="text-center text-white/60 mb-6 text-sm">
-            Join the waitlist to be first to experience the magic
+            Request TestFlight access to start building
           </p>
           <WaitlistForm />
         </motion.div>
@@ -89,7 +89,7 @@ export default function Home() {
           className="px-4 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10 max-w-full"
         >
           <span className="text-xs text-white/60 uppercase tracking-wider">
-            Coming Soon
+            Private Beta on TestFlight
           </span>
         </motion.div>
       </div>

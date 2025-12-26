@@ -19,29 +19,27 @@ function Crayon() {
   return (
     <group ref={meshRef} position={[0, 0, 0]}>
       {/* Crayon body */}
-      <mesh position={[0, 0, 0]} castShadow>
+      <mesh position={[0, -0.5, 0]} castShadow>
         <cylinderGeometry args={[0.5, 0.5, 4, 64]} />
         <meshStandardMaterial 
           color="#8B7FF7" 
-          roughness={0.3}
+          roughness={0.4}
           metalness={0.1}
-          emissive="#8B7FF7"
-          emissiveIntensity={0.1}
         />
       </mesh>
       
-      {/* Crayon tip (cone) */}
-      <mesh position={[0, 2.5, 0]} castShadow>
+      {/* Crayon tip (cone) - slightly overlapped */}
+      <mesh position={[0, 1.95, 0]} castShadow>
         <coneGeometry args={[0.5, 1, 64]} />
         <meshStandardMaterial 
-          color="#6B5FD7"
+          color="#8B7FF7"
           roughness={0.4}
-          metalness={0}
+          metalness={0.1}
         />
       </mesh>
       
       {/* Crayon wrapper/label */}
-      <mesh position={[0, -0.5, 0]}>
+      <mesh position={[0, -1.0, 0]}>
         <cylinderGeometry args={[0.52, 0.52, 2.5, 64]} />
         <meshStandardMaterial 
           color="#1a1a1a"
@@ -51,7 +49,7 @@ function Crayon() {
       </mesh>
       
       {/* Label text band */}
-      <mesh position={[0, -0.5, 0]}>
+      <mesh position={[0, -1.0, 0]}>
         <cylinderGeometry args={[0.53, 0.53, 0.5, 64]} />
         <meshStandardMaterial 
           color="#ffffff"
