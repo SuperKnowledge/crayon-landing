@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import MouseTrail from "@/components/MouseTrail";
 import WaitlistForm from "@/components/WaitlistForm";
+import Footer from "@/components/Footer";
 
 // Dynamically import 3D component to avoid SSR issues
 const CrayonScene = dynamic(() => import("@/components/CrayonScene"), {
@@ -94,30 +95,7 @@ export default function Home() {
       </div>
       
       {/* Footer */}
-      <motion.footer
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="row-start-3 p-6 text-center"
-      >
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-xs text-white/40">
-          <span>© 2025 Crayon AI, Inc.</span>
-          <span className="hidden md:inline">•</span>
-          <a 
-            href="mailto:support@crayon-ai.com" 
-            className="hover:text-white/60 transition-colors"
-          >
-            support@crayon-ai.com
-          </a>
-          <span className="hidden md:inline">•</span>
-          <Link 
-            href="/privacy-policy" 
-            className="hover:text-white/60 transition-colors"
-          >
-            Privacy Policy
-          </Link>
-        </div>
-      </motion.footer>
+      <Footer />
     </main>
   );
 }
