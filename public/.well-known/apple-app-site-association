@@ -5,7 +5,7 @@
       {
         "appID": "5KCG9224X7.com.crayon-ai.crayon.app",
         "paths": [
-          "/app/*",
+          "/apps/*",
           "/clip/*",
           "/u/*",
           "/api/*"
