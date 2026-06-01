@@ -12,12 +12,22 @@ type BackendAuthResponse = {
   detail?: string;
 };
 
+// Keep this in sync with each backend environment's CLI_PUBLIC_API_BASE.
 const DEFAULT_ALLOWED_API_BASES = [
   "https://api.crayon-ai.com/api",
   "https://staging.api.crayon-ai.com/api",
   "https://dev.api.crayon-ai.com/api",
   "http://localhost:8000/api",
 ];
+
+class ApiBaseError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+  ) {
+    super(message);
+  }
+}
 
 function normalizeApiBase(value: string): string {
   return value.trim().replace(/\/+$/, "");
@@ -35,18 +45,19 @@ function apiBase(requestedApiBase: string): string {
   const requested = normalizeApiBase(requestedApiBase);
   if (requested) {
     if (!allowedApiBases().has(requested)) {
-      throw new Error("CLI login API environment is not allowed");
+      throw new ApiBaseError("CLI login API environment is not allowed", 400);
     }
     return requested;
   }
 
+  // Defense-in-depth for direct API calls/tests; the /cli-login page always passes api_base from the backend.
   const configured = process.env.CRAYON_API_BASE || process.env.NEXT_PUBLIC_CRAYON_API_BASE;
   if (!configured && process.env.NODE_ENV === "production") {
-    throw new Error("CRAYON_API_BASE is not configured for CLI login");
+    throw new ApiBaseError("CRAYON_API_BASE is not configured for CLI login", 500);
   }
   const fallback = normalizeApiBase(configured || "http://localhost:8000/api");
   if (!allowedApiBases().has(fallback)) {
-    throw new Error("Configured CLI login API environment is not allowed");
+    throw new ApiBaseError("Configured CLI login API environment is not allowed", 500);
   }
   return fallback;
 }
@@ -76,7 +87,10 @@ export async function POST(request: Request) {
   try {
     baseUrl = apiBase(requestedApiBase);
   } catch (error) {
-    return errorResponse(error instanceof Error ? error.message : "CLI login API is not configured", 500);
+    if (error instanceof ApiBaseError) {
+      return errorResponse(error.message, error.status);
+    }
+    return errorResponse("CLI login API is not configured", 500);
   }
 
   let signinResponse: Response;
