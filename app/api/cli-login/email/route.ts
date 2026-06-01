@@ -12,12 +12,43 @@ type BackendAuthResponse = {
   detail?: string;
 };
 
-function apiBase(): string {
+const DEFAULT_ALLOWED_API_BASES = [
+  "https://api.crayon-ai.com/api",
+  "https://staging.api.crayon-ai.com/api",
+  "https://dev.api.crayon-ai.com/api",
+  "http://localhost:8000/api",
+];
+
+function normalizeApiBase(value: string): string {
+  return value.trim().replace(/\/+$/, "");
+}
+
+function allowedApiBases(): Set<string> {
+  const configured = process.env.CLI_LOGIN_ALLOWED_API_BASES;
+  const values = configured
+    ? configured.split(",").map(normalizeApiBase).filter(Boolean)
+    : DEFAULT_ALLOWED_API_BASES;
+  return new Set(values);
+}
+
+function apiBase(requestedApiBase: string): string {
+  const requested = normalizeApiBase(requestedApiBase);
+  if (requested) {
+    if (!allowedApiBases().has(requested)) {
+      throw new Error("CLI login API environment is not allowed");
+    }
+    return requested;
+  }
+
   const configured = process.env.CRAYON_API_BASE || process.env.NEXT_PUBLIC_CRAYON_API_BASE;
   if (!configured && process.env.NODE_ENV === "production") {
     throw new Error("CRAYON_API_BASE is not configured for CLI login");
   }
-  return (configured || "http://localhost:8000/api").replace(/\/+$/, "");
+  const fallback = normalizeApiBase(configured || "http://localhost:8000/api");
+  if (!allowedApiBases().has(fallback)) {
+    throw new Error("Configured CLI login API environment is not allowed");
+  }
+  return fallback;
 }
 
 function errorResponse(detail: string, status = 400) {
@@ -27,6 +58,7 @@ function errorResponse(detail: string, status = 400) {
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
   const state = typeof body?.state === "string" ? body.state.trim() : "";
+  const requestedApiBase = typeof body?.api_base === "string" ? body.api_base : "";
   const email = typeof body?.email === "string" ? body.email.trim() : "";
   const password = typeof body?.password === "string" ? body.password : "";
 
@@ -42,7 +74,7 @@ export async function POST(request: Request) {
 
   let baseUrl: string;
   try {
-    baseUrl = apiBase();
+    baseUrl = apiBase(requestedApiBase);
   } catch (error) {
     return errorResponse(error instanceof Error ? error.message : "CLI login API is not configured", 500);
   }

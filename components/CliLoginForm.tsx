@@ -4,6 +4,7 @@ import { useState } from "react";
 
 type CliLoginFormProps = {
   stateValue: string;
+  apiBase: string;
 };
 
 type IssueResponse = {
@@ -24,7 +25,7 @@ type IssuedLogin = {
 
 type Step = "form" | "posting" | "authorize";
 
-export function CliLoginForm({ stateValue }: CliLoginFormProps) {
+export function CliLoginForm({ stateValue, apiBase }: CliLoginFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -51,7 +52,7 @@ export function CliLoginForm({ stateValue }: CliLoginFormProps) {
       const issueResponse = await fetch("/api/cli-login/email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ state: stateValue, email, password }),
+        body: JSON.stringify({ state: stateValue, api_base: apiBase, email, password }),
       });
       const issueData = (await issueResponse.json().catch(() => ({}))) as IssueResponse;
 
@@ -94,6 +95,15 @@ export function CliLoginForm({ stateValue }: CliLoginFormProps) {
     );
   }
 
+  if (!apiBase) {
+    return (
+      <div className="w-full max-w-md rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-center shadow-2xl shadow-black/20">
+        <h1 className="font-display text-2xl font-bold text-white">CLI Login</h1>
+        <p className="mt-4 text-sm text-white/60">Missing API environment. Start again from the Crayon CLI.</p>
+      </div>
+    );
+  }
+
   if (step === "authorize" && issuedLogin) {
     return (
       <div className="w-full max-w-md rounded-2xl border border-white/10 bg-white/[0.03] p-8 shadow-2xl shadow-black/20">
@@ -106,6 +116,8 @@ export function CliLoginForm({ stateValue }: CliLoginFormProps) {
           <p className="mt-1 break-words text-base font-semibold text-white">{issuedLogin.userEmail}</p>
           <p className="mt-5 text-sm text-white/70">Local CLI callback</p>
           <p className="mt-1 font-mono text-sm text-white">{issuedLogin.callbackDisplay}</p>
+          <p className="mt-5 text-sm text-white/70">Crayon API</p>
+          <p className="mt-1 break-words font-mono text-sm text-white">{apiBase}</p>
         </div>
         <p className="mt-5 text-sm leading-6 text-white/60">
           Continue only if you started <span className="font-mono text-white">crayon login</span> on this device.
