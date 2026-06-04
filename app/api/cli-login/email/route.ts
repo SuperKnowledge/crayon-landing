@@ -70,6 +70,8 @@ function errorResponse(detail: string, status = 400) {
 }
 
 function clientIp(request: Request): string {
+  // Vercel/proxy deployments are expected to provide x-forwarded-for.
+  // If neither proxy header is present, requests share the "unknown" bucket.
   const forwardedFor = request.headers.get("x-forwarded-for");
   if (forwardedFor) {
     return forwardedFor.split(",", 1)[0]?.trim() || "unknown";
