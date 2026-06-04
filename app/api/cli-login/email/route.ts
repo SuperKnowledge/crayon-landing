@@ -19,6 +19,9 @@ const DEFAULT_ALLOWED_API_BASES = [
   "https://dev.api.crayon-ai.com/api",
   "http://localhost:8000/api",
 ];
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX_ATTEMPTS = 10;
+const attemptsByIp = new Map<string, number[]>();
 
 class ApiBaseError extends Error {
   constructor(
@@ -66,7 +69,34 @@ function errorResponse(detail: string, status = 400) {
   return NextResponse.json({ detail }, { status });
 }
 
+function clientIp(request: Request): string {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  if (forwardedFor) {
+    return forwardedFor.split(",", 1)[0]?.trim() || "unknown";
+  }
+  return request.headers.get("x-real-ip") || "unknown";
+}
+
+function checkRateLimit(request: Request): NextResponse | null {
+  const key = clientIp(request);
+  const now = Date.now();
+  const cutoff = now - RATE_LIMIT_WINDOW_MS;
+  const attempts = (attemptsByIp.get(key) || []).filter((timestamp) => timestamp > cutoff);
+  if (attempts.length >= RATE_LIMIT_MAX_ATTEMPTS) {
+    attemptsByIp.set(key, attempts);
+    return errorResponse("Too many CLI login attempts; retry in a minute", 429);
+  }
+  attempts.push(now);
+  attemptsByIp.set(key, attempts);
+  return null;
+}
+
 export async function POST(request: Request) {
+  const limited = checkRateLimit(request);
+  if (limited) {
+    return limited;
+  }
+
   const body = await request.json().catch(() => null);
   const state = typeof body?.state === "string" ? body.state.trim() : "";
   const requestedApiBase = typeof body?.api_base === "string" ? body.api_base : "";
