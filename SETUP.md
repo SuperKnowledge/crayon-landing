@@ -158,6 +158,93 @@ The site is already mobile-optimized with:
 - Check that the script is deployed with "Anyone" access
 - Look at Vercel function logs for errors
 
+## Investor Deck Setup
+
+The investor deck lives at `/deck` and is protected by an environment-variable password.
+The login cookie is consumed on each deck load, so a browser refresh asks for the
+password again.
+
+### Environment variables
+
+```env
+DECK_PASSWORD="choose-a-shared-password"
+DECK_GOOGLE_SCRIPT_URL="https://script.google.com/macros/s/.../exec"
+```
+
+`DECK_COOKIE_SECRET` is optional. If omitted, the deck password signs the session cookie.
+
+### Tracking Sheet
+
+Create a separate Google Sheet for deck tracking with these headers:
+
+```text
+Email | View Count | First Viewed At | Last Viewed At | Last User Agent | Last Referrer | Last IP
+```
+
+In **Extensions > Apps Script**, deploy this as a web app with **Execute as: Me** and
+**Who has access: Anyone**:
+
+```javascript
+function doPost(e) {
+  try {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    const data = JSON.parse(e.postData.contents);
+    const email = String(data.email || '').trim().toLowerCase();
+    const timestamp = data.timestamp || new Date().toISOString();
+
+    if (!email) {
+      throw new Error('Missing email');
+    }
+
+    const lastRow = sheet.getLastRow();
+    const emails = lastRow > 1
+      ? sheet.getRange(2, 1, lastRow - 1, 1).getValues().flat()
+      : [];
+    const existingIndex = emails.findIndex(function(value) {
+      return String(value || '').trim().toLowerCase() === email;
+    });
+
+    if (existingIndex === -1) {
+      sheet.appendRow([
+        email,
+        1,
+        timestamp,
+        timestamp,
+        data.userAgent || '',
+        data.referrer || '',
+        data.ip || ''
+      ]);
+    } else {
+      const row = existingIndex + 2;
+      const values = sheet.getRange(row, 1, 1, 7).getValues()[0];
+      const viewCount = Number(values[1] || 0) + 1;
+
+      sheet.getRange(row, 1, 1, 7).setValues([[
+        email,
+        viewCount,
+        values[2] || timestamp,
+        timestamp,
+        data.userAgent || values[4] || '',
+        data.referrer || values[5] || '',
+        data.ip || values[6] || ''
+      ]]);
+    }
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ success: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ success: false, error: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+```
+
+The app logs a `page_view` every time an authenticated visitor loads `/deck`. The script
+keeps one row per email, increments `View Count`, and updates the latest viewed
+timestamp/metadata.
+
 ### Build errors
 - Ensure Node.js version is 18.17+
 - Delete `node_modules` and `.next` folders, then reinstall:

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+import "reveal.js/reveal.css";
 import "./globals.css";
 
 // Primary font - clean and modern

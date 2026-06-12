@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import MouseTrail from "@/components/MouseTrail";
 import WaitlistForm from "@/components/WaitlistForm";
 import Footer from "@/components/Footer";
