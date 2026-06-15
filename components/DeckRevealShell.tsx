@@ -34,6 +34,22 @@ export default function DeckRevealShell({ children, exportHref }: DeckRevealShel
       });
     }
 
+    function installPrintPageStyle() {
+      let style = document.getElementById("crayon-deck-print-page-style");
+      if (!style) {
+        style = document.createElement("style");
+        style.id = "crayon-deck-print-page-style";
+        document.head.appendChild(style);
+      }
+
+      style.textContent = `
+        @page {
+          size: 13.333333in 7.5in;
+          margin: 0;
+        }
+      `;
+    }
+
     if (!isPrintPdf) {
       fetch("/api/deck/logout", {
         method: "POST",
@@ -67,8 +83,10 @@ export default function DeckRevealShell({ children, exportHref }: DeckRevealShel
 
       if (isPrintPdf) {
         deck.on("pdf-ready", () => {
+          installPrintPageStyle();
           revealPrintSlides();
           void document.fonts.ready.then(() => {
+            installPrintPageStyle();
             revealPrintSlides();
             if (!navigator.webdriver) {
               printTimeout = window.setTimeout(() => window.print(), 250);
