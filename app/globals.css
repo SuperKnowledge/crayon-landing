@@ -838,6 +838,11 @@ html.reveal-print .deck-export-button {
   display: none !important;
 }
 
+html.reveal-print .deck-shell .reveal .slides .pdf-page section[hidden] {
+  display: block !important;
+  visibility: visible !important;
+}
+
 html.reveal-print,
 html.reveal-print body {
   background: #fbfaf7 !important;

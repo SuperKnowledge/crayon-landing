@@ -27,6 +27,13 @@ export default function DeckRevealShell({ children, exportHref }: DeckRevealShel
     let cancelled = false;
     let printTimeout: number | null = null;
 
+    function revealPrintSlides() {
+      revealRef.current?.querySelectorAll<HTMLElement>(".pdf-page section[hidden]").forEach((slide) => {
+        slide.removeAttribute("hidden");
+        slide.removeAttribute("aria-hidden");
+      });
+    }
+
     if (!isPrintPdf) {
       fetch("/api/deck/logout", {
         method: "POST",
@@ -58,10 +65,14 @@ export default function DeckRevealShell({ children, exportHref }: DeckRevealShel
       });
       deckRef.current = deck;
 
-      if (isPrintPdf && !navigator.webdriver) {
+      if (isPrintPdf) {
         deck.on("pdf-ready", () => {
+          revealPrintSlides();
           void document.fonts.ready.then(() => {
-            printTimeout = window.setTimeout(() => window.print(), 250);
+            revealPrintSlides();
+            if (!navigator.webdriver) {
+              printTimeout = window.setTimeout(() => window.print(), 250);
+            }
           });
         });
       }
