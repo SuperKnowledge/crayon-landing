@@ -302,6 +302,31 @@
   background: var(--deck-paper);
 }
 
+.deck-export-button {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.35rem;
+  border: 1px solid var(--deck-rule);
+  border-radius: 0.4rem;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--deck-ink);
+  padding: 0 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(23, 23, 23, 0.08);
+}
+
+.deck-export-button:hover {
+  border-color: var(--deck-orange);
+}
+
 .deck-shell .reveal .slides {
   text-align: left;
 }
@@ -801,4 +826,31 @@
   .run-breakdown {
     grid-template-columns: 1fr;
   }
+}
+
+@media print {
+  .deck-export-button {
+    display: none !important;
+  }
+}
+
+html.reveal-print .deck-export-button {
+  display: none !important;
+}
+
+html.reveal-print,
+html.reveal-print body {
+  background: #fbfaf7 !important;
+}
+
+html.reveal-print body.reveal-viewport,
+html.reveal-print .deck-page,
+html.reveal-print .deck-shell,
+html.reveal-print .deck-shell .reveal,
+html.reveal-print .deck-shell .reveal .slides .pdf-page {
+  background: var(--deck-paper, #fbfaf7) !important;
+}
+
+html.reveal-print .deck-shell {
+  min-height: auto;
 }

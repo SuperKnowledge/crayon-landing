@@ -3,7 +3,12 @@ import { cookies, headers } from "next/headers";
 import Image from "next/image";
 import DeckLoginForm from "@/components/DeckLoginForm";
 import DeckRevealShell from "@/components/DeckRevealShell";
-import { DECK_AUTH_COOKIE, verifyDeckSession } from "@/lib/deck-auth";
+import {
+  createDeckExportToken,
+  DECK_AUTH_COOKIE,
+  verifyDeckExportToken,
+  verifyDeckSession,
+} from "@/lib/deck-auth";
 import { clientIpFromHeaders, logDeckEvent } from "@/lib/deck-tracking";
 
 export const runtime = "nodejs";
@@ -77,27 +82,39 @@ function SlideTitle({ eyebrow, title }: { eyebrow?: string; title: string }) {
   );
 }
 
-export default async function DeckPage() {
+type PageProps = {
+  searchParams: Promise<{
+    export?: string;
+  }>;
+};
+
+export default async function DeckPage({ searchParams }: PageProps) {
   const cookieStore = await cookies();
-  const session = verifyDeckSession(cookieStore.get(DECK_AUTH_COOKIE)?.value);
+  const { export: exportToken } = await searchParams;
+  const cookieSession = verifyDeckSession(cookieStore.get(DECK_AUTH_COOKIE)?.value);
+  const exportSession = verifyDeckExportToken(exportToken);
+  const session = cookieSession || exportSession;
 
   if (!session) {
     return <DeckLoginForm />;
   }
 
   const headerList = await headers();
-  await logDeckEvent({
-    event: "page_view",
-    email: session.email,
-    path: "/deck",
-    userAgent: headerList.get("user-agent") || "",
-    referrer: headerList.get("referer") || "",
-    ip: clientIpFromHeaders(headerList),
-  });
+  if (cookieSession) {
+    await logDeckEvent({
+      event: "page_view",
+      email: session.email,
+      path: "/deck",
+      userAgent: headerList.get("user-agent") || "",
+      referrer: headerList.get("referer") || "",
+      ip: clientIpFromHeaders(headerList),
+    });
+  }
+  const deckExportHref = `/deck?print-pdf&export=${encodeURIComponent(createDeckExportToken(session.email))}`;
 
   return (
     <main className="deck-page">
-      <DeckRevealShell>
+      <DeckRevealShell exportHref={deckExportHref}>
         <section className="cover-slide">
           <Image
             className="cover-logo"

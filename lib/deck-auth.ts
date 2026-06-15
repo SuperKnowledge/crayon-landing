@@ -2,11 +2,13 @@ import crypto from "crypto";
 
 export const DECK_AUTH_COOKIE = "crayon_deck_auth";
 export const DECK_COOKIE_MAX_AGE_SECONDS = 60;
+const DECK_EXPORT_TOKEN_MAX_AGE_SECONDS = 5 * 60;
 
 export type DeckSession = {
   email: string;
   iat: number;
   exp: number;
+  purpose?: "session" | "export";
 };
 
 function cookieSecret(): string {
@@ -50,19 +52,31 @@ export function isValidDeckPassword(candidate: string): boolean {
   return safeEqual(candidate, configured);
 }
 
-export function createDeckSession(email: string): string {
+function createDeckToken(email: string, maxAgeSeconds: number, purpose: DeckSession["purpose"]): string {
   const now = Math.floor(Date.now() / 1000);
   const session: DeckSession = {
     email: email.trim().toLowerCase(),
     iat: now,
-    exp: now + DECK_COOKIE_MAX_AGE_SECONDS,
+    exp: now + maxAgeSeconds,
+    purpose,
   };
   const payload = encodeBase64Url(JSON.stringify(session));
 
   return `${payload}.${sign(payload)}`;
 }
 
-export function verifyDeckSession(value: string | undefined): DeckSession | null {
+export function createDeckSession(email: string): string {
+  return createDeckToken(email, DECK_COOKIE_MAX_AGE_SECONDS, "session");
+}
+
+export function createDeckExportToken(email: string): string {
+  return createDeckToken(email, DECK_EXPORT_TOKEN_MAX_AGE_SECONDS, "export");
+}
+
+function verifyDeckToken(
+  value: string | undefined,
+  expectedPurpose: DeckSession["purpose"],
+): DeckSession | null {
   if (!value) {
     return null;
   }
@@ -92,6 +106,12 @@ export function verifyDeckSession(value: string | undefined): DeckSession | null
     ) {
       return null;
     }
+    if (session.purpose && session.purpose !== expectedPurpose) {
+      return null;
+    }
+    if (!session.purpose && expectedPurpose !== "session") {
+      return null;
+    }
     if (session.exp <= Math.floor(Date.now() / 1000)) {
       return null;
     }
@@ -100,8 +120,17 @@ export function verifyDeckSession(value: string | undefined): DeckSession | null
       email: session.email,
       iat: session.iat,
       exp: session.exp,
+      purpose: session.purpose,
     };
   } catch {
     return null;
   }
+}
+
+export function verifyDeckSession(value: string | undefined): DeckSession | null {
+  return verifyDeckToken(value, "session");
+}
+
+export function verifyDeckExportToken(value: string | undefined): DeckSession | null {
+  return verifyDeckToken(value, "export");
 }
