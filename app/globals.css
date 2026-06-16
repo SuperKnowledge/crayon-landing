@@ -837,6 +837,98 @@
   .deck-export-button {
     display: none !important;
   }
+
+  html.reveal-print,
+  html.reveal-print body {
+    width: 13.333333in !important;
+    margin: 0 !important;
+  }
+
+  html.reveal-print body.reveal-viewport,
+  html.reveal-print .deck-page,
+  html.reveal-print .deck-shell,
+  html.reveal-print .deck-shell .reveal {
+    width: 13.333333in !important;
+    min-width: 13.333333in !important;
+    max-width: 13.333333in !important;
+    height: auto !important;
+    min-height: 0 !important;
+    background: var(--deck-paper, #fbfaf7) !important;
+  }
+
+  html.reveal-print .deck-shell .reveal .slides .pdf-page {
+    width: 13.333333in !important;
+    min-width: 13.333333in !important;
+    max-width: 13.333333in !important;
+    height: 7.5in !important;
+    min-height: 7.5in !important;
+    max-height: 7.5in !important;
+    margin: 0 !important;
+    background: var(--deck-paper, #fbfaf7) !important;
+  }
+
+  html.reveal-print .deck-shell .reveal .slides .pdf-page > section {
+    top: 0 !important;
+    left: 0 !important;
+    width: 13.333333in !important;
+    height: 7.5in !important;
+    padding: 2.15rem 2.55rem !important;
+  }
+
+  html.reveal-print .deck-shell .reveal .slides .pdf-page > section.cover-slide,
+  html.reveal-print .deck-shell .reveal .slides .pdf-page > section.title-only-slide {
+    display: flex !important;
+  }
+
+  html.reveal-print .deck-shell .reveal .slides .pdf-page > section.cover-slide {
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  html.reveal-print .deck-shell .reveal .slides .pdf-page > section.title-only-slide {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  html.reveal-print .split-layout {
+    grid-template-columns: minmax(0, 1.1fr) minmax(17rem, 0.75fr) !important;
+  }
+
+  html.reveal-print .dense-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  html.reveal-print .roadmap-band {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  html.reveal-print .run-breakdown {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  }
+
+  html.reveal-print .arc-visual {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  html.reveal-print .timeline-band {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  html.reveal-print .lifecycle-labels {
+    grid-template-columns: 1fr 9fr 90fr !important;
+  }
+
+  html.reveal-print .lifecycle-zoom {
+    grid-template-columns: 7rem 1fr !important;
+  }
+
+  html.reveal-print .lifecycle-zoom div {
+    grid-template-columns: 1fr 9fr !important;
+  }
+
+  html.reveal-print .coverage-overlay {
+    grid-template-columns: 1fr 3.6fr !important;
+  }
 }
 
 html.reveal-print .deck-export-button {
@@ -851,56 +943,8 @@ html.reveal-print .deck-shell .reveal .slides .pdf-page section[hidden] {
 html.reveal-print,
 html.reveal-print body {
   background: #fbfaf7 !important;
-  width: 13.333333in !important;
-  margin: 0 !important;
-}
-
-html.reveal-print body.reveal-viewport,
-html.reveal-print .deck-page,
-html.reveal-print .deck-shell,
-html.reveal-print .deck-shell .reveal {
-  width: 13.333333in !important;
-  min-width: 13.333333in !important;
-  max-width: 13.333333in !important;
-  height: auto !important;
-  min-height: 0 !important;
-  background: var(--deck-paper, #fbfaf7) !important;
-}
-
-html.reveal-print .deck-shell .reveal .slides .pdf-page {
-  width: 13.333333in !important;
-  min-width: 13.333333in !important;
-  max-width: 13.333333in !important;
-  height: 7.5in !important;
-  min-height: 7.5in !important;
-  max-height: 7.5in !important;
-  margin: 0 !important;
-  background: var(--deck-paper, #fbfaf7) !important;
 }
 
 html.reveal-print .deck-shell {
   min-height: auto;
-}
-
-html.reveal-print .deck-shell .reveal .slides .pdf-page > section {
-  top: 0 !important;
-  left: 0 !important;
-  width: 13.333333in !important;
-  height: 7.5in !important;
-  padding: 2.15rem 2.55rem !important;
-}
-
-html.reveal-print .deck-shell .reveal .slides .pdf-page > section.cover-slide,
-html.reveal-print .deck-shell .reveal .slides .pdf-page > section.title-only-slide {
-  display: flex !important;
-}
-
-html.reveal-print .deck-shell .reveal .slides .pdf-page > section.cover-slide {
-  flex-direction: column !important;
-  justify-content: center !important;
-}
-
-html.reveal-print .deck-shell .reveal .slides .pdf-page > section.title-only-slide {
-  align-items: center !important;
-  justify-content: center !important;
 }
