@@ -5,10 +5,15 @@ import type { RevealApi } from "reveal.js";
 
 type DeckRevealShellProps = {
   children: React.ReactNode;
-  exportHref: string;
+  clearSessionOnLoad: boolean;
+  exportHref?: string | null;
 };
 
-export default function DeckRevealShell({ children, exportHref }: DeckRevealShellProps) {
+export default function DeckRevealShell({
+  children,
+  clearSessionOnLoad,
+  exportHref,
+}: DeckRevealShellProps) {
   const revealRef = useRef<HTMLDivElement>(null);
   const deckRef = useRef<RevealApi | null>(null);
   const initializedRef = useRef(false);
@@ -50,7 +55,7 @@ export default function DeckRevealShell({ children, exportHref }: DeckRevealShel
       `;
     }
 
-    if (!isPrintPdf) {
+    if (!isPrintPdf && clearSessionOnLoad) {
       fetch("/api/deck/logout", {
         method: "POST",
         keepalive: true,
@@ -71,9 +76,11 @@ export default function DeckRevealShell({ children, exportHref }: DeckRevealShel
         center: false,
         controls: true,
         disableLayout: false,
+        fragments: false,
         hash: true,
         height: 720,
         margin: 0.06,
+        pdfSeparateFragments: false,
         progress: true,
         transition: "fade",
         view: isPrintPdf ? "print" : null,
@@ -111,13 +118,15 @@ export default function DeckRevealShell({ children, exportHref }: DeckRevealShel
         initializedRef.current = false;
       }
     };
-  }, []);
+  }, [clearSessionOnLoad]);
 
   return (
     <div className="deck-shell">
-      <a className="deck-export-button" href={exportHref} target="_blank" rel="noreferrer">
-        Export PDF
-      </a>
+      {exportHref ? (
+        <a className="deck-export-button" href={exportHref} target="_blank" rel="noreferrer">
+          Export PDF
+        </a>
+      ) : null}
       <div className="reveal" ref={revealRef}>
         <div className="slides">{children}</div>
       </div>

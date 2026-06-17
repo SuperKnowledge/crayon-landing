@@ -4,6 +4,7 @@ export type DeckTrackingEvent = {
   event: DeckEventName;
   email: string;
   path?: string;
+  resource?: "deck" | "one_pager";
   userAgent?: string;
   referrer?: string;
   ip?: string;

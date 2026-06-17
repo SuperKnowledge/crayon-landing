@@ -2,7 +2,9 @@ import crypto from "crypto";
 
 export const DECK_AUTH_COOKIE = "crayon_deck_auth";
 export const DECK_COOKIE_MAX_AGE_SECONDS = 60;
+const DECK_PERSISTENT_COOKIE_MAX_AGE_SECONDS = 30 * 24 * 60 * 60;
 const DECK_EXPORT_TOKEN_MAX_AGE_SECONDS = 5 * 60;
+const DECK_EXPORT_ALLOWED_EMAIL = "tonyhmzhang@gmail.com";
 
 export type DeckSession = {
   email: string;
@@ -52,6 +54,20 @@ export function isValidDeckPassword(candidate: string): boolean {
   return safeEqual(candidate, configured);
 }
 
+export function shouldPersistDeckSession(): boolean {
+  return process.env.DECK_PERSIST_SESSION_COOKIE === "true";
+}
+
+export function deckSessionMaxAgeSeconds(): number {
+  return shouldPersistDeckSession()
+    ? DECK_PERSISTENT_COOKIE_MAX_AGE_SECONDS
+    : DECK_COOKIE_MAX_AGE_SECONDS;
+}
+
+export function canExportDeck(email: string): boolean {
+  return email.trim().toLowerCase() === DECK_EXPORT_ALLOWED_EMAIL;
+}
+
 function createDeckToken(email: string, maxAgeSeconds: number, purpose: DeckSession["purpose"]): string {
   const now = Math.floor(Date.now() / 1000);
   const session: DeckSession = {
@@ -66,7 +82,7 @@ function createDeckToken(email: string, maxAgeSeconds: number, purpose: DeckSess
 }
 
 export function createDeckSession(email: string): string {
-  return createDeckToken(email, DECK_COOKIE_MAX_AGE_SECONDS, "session");
+  return createDeckToken(email, deckSessionMaxAgeSeconds(), "session");
 }
 
 export function createDeckExportToken(email: string): string {

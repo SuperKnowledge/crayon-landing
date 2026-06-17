@@ -160,22 +160,32 @@ The site is already mobile-optimized with:
 
 ## Investor Deck Setup
 
-The investor deck lives at `/deck` and is protected by an environment-variable password.
-The login cookie is consumed on each deck load, so a browser refresh asks for the
-password again.
+The investor deck lives at `/deck` and the investor one-pager lives at `/one-pager`.
+Both are protected by the same environment-variable password.
+By default, the login cookie is consumed on each deck load, so a browser refresh
+asks for the password again. For local development only, set
+`DECK_PERSIST_SESSION_COOKIE=true` to keep the deck unlocked across reloads.
 
 ### Environment variables
 
 ```env
 DECK_PASSWORD="choose-a-shared-password"
 DECK_GOOGLE_SCRIPT_URL="https://script.google.com/macros/s/.../exec"
+# Optional local-only convenience:
+DECK_PERSIST_SESSION_COOKIE="true"
 ```
 
 `DECK_COOKIE_SECRET` is optional. If omitted, the deck password signs the session cookie.
+Leave `DECK_PERSIST_SESSION_COOKIE` unset in Vercel to preserve the deployed behavior.
 
 ### Tracking Sheet
 
-Create a separate Google Sheet for deck tracking with these headers:
+Create one Google Sheet for investor-material tracking with two tabs:
+
+- `Deck`
+- `One Pager`
+
+Both tabs should use these exact headers:
 
 ```text
 Email | View Count | First Viewed At | Last Viewed At | Last User Agent | Last Referrer | Last IP
@@ -185,10 +195,49 @@ In **Extensions > Apps Script**, deploy this as a web app with **Execute as: Me*
 **Who has access: Anyone**:
 
 ```javascript
+const SHEETS_BY_RESOURCE = {
+  deck: 'Deck',
+  one_pager: 'One Pager'
+};
+
+const HEADERS = [
+  'Email',
+  'View Count',
+  'First Viewed At',
+  'Last Viewed At',
+  'Last User Agent',
+  'Last Referrer',
+  'Last IP'
+];
+
+function sheetFor(data) {
+  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  const resource = String(data.resource || '').trim().toLowerCase();
+  const path = String(data.path || '').trim().toLowerCase();
+  const sheetName = SHEETS_BY_RESOURCE[resource] || (path.indexOf('one-pager') !== -1 ? 'One Pager' : 'Deck');
+  let sheet = spreadsheet.getSheetByName(sheetName);
+
+  if (!sheet) {
+    sheet = spreadsheet.insertSheet(sheetName);
+  }
+
+  const headerRange = sheet.getRange(1, 1, 1, HEADERS.length);
+  const currentHeaders = headerRange.getValues()[0];
+  const hasHeaders = currentHeaders.some(function(value) {
+    return String(value || '').trim();
+  });
+
+  if (!hasHeaders) {
+    headerRange.setValues([HEADERS]);
+  }
+
+  return sheet;
+}
+
 function doPost(e) {
   try {
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     const data = JSON.parse(e.postData.contents);
+    const sheet = sheetFor(data);
     const email = String(data.email || '').trim().toLowerCase();
     const timestamp = data.timestamp || new Date().toISOString();
 
@@ -241,9 +290,9 @@ function doPost(e) {
 }
 ```
 
-The app logs a `page_view` every time an authenticated visitor loads `/deck`. The script
-keeps one row per email, increments `View Count`, and updates the latest viewed
-timestamp/metadata.
+The app logs a `page_view` every time an authenticated visitor loads `/deck` or
+`/one-pager`. The script keeps one row per email per tab, increments `View Count`,
+and updates the latest viewed timestamp/metadata.
 
 ### Build errors
 - Ensure Node.js version is 18.17+

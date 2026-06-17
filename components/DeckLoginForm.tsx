@@ -3,7 +3,19 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function DeckLoginForm() {
+type DeckLoginFormProps = {
+  buttonLabel?: string;
+  loadingLabel?: string;
+  resourceLabel?: string;
+  title?: string;
+};
+
+export default function DeckLoginForm({
+  buttonLabel = "View deck",
+  loadingLabel = "Opening...",
+  resourceLabel = "the deck",
+  title = "Investor Deck",
+}: DeckLoginFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
@@ -27,7 +39,7 @@ export default function DeckLoginForm() {
       if (!response.ok) {
         setStatus("error");
         setMessage(
-          data?.error || `Unable to open the deck. Server returned ${response.status}.`,
+          data?.error || `Unable to open ${resourceLabel}. Server returned ${response.status}.`,
         );
         return;
       }
@@ -50,7 +62,7 @@ export default function DeckLoginForm() {
           height={52}
           priority
         />
-        <h1 id="deck-login-title">Investor Deck</h1>
+        <h1 id="deck-login-title">{title}</h1>
         <form onSubmit={handleSubmit} className="deck-login-form">
           <label>
             <span>Email</span>
@@ -73,7 +85,7 @@ export default function DeckLoginForm() {
             />
           </label>
           <button type="submit" disabled={status === "loading"}>
-            {status === "loading" ? "Opening..." : "View deck"}
+            {status === "loading" ? loadingLabel : buttonLabel}
           </button>
           {message ? <p className="deck-login-error">{message}</p> : null}
         </form>

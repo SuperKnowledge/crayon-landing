@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import {
   createDeckSession,
+  deckSessionMaxAgeSeconds,
   DECK_AUTH_COOKIE,
-  DECK_COOKIE_MAX_AGE_SECONDS,
   isValidDeckPassword,
 } from "@/lib/deck-auth";
 import { clientIpFromHeaders } from "@/lib/deck-tracking";
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     }
 
     if (!process.env.DECK_PASSWORD) {
-      return errorResponse("Deck password is not configured.", 503);
+      return errorResponse("Investor access code is not configured.", 503);
     }
 
     const body = await request.json().catch(() => null);
@@ -54,7 +54,7 @@ export async function POST(request: Request) {
     }
 
     if (!password) {
-      return errorResponse("Please enter the deck access code.");
+      return errorResponse("Please enter the access code.");
     }
 
     if (!isValidDeckPassword(password)) {
@@ -69,12 +69,12 @@ export async function POST(request: Request) {
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
-      maxAge: DECK_COOKIE_MAX_AGE_SECONDS,
+      maxAge: deckSessionMaxAgeSeconds(),
     });
 
     return response;
   } catch (error) {
-    console.error("Deck login error:", error);
-    return errorResponse("Deck access is temporarily unavailable.", 500);
+    console.error("Investor material login error:", error);
+    return errorResponse("Investor access is temporarily unavailable.", 500);
   }
 }
