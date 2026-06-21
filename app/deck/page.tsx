@@ -158,7 +158,7 @@ export default async function DeckPage({ searchParams }: PageProps) {
           <SlideTitle eyebrow="Building" title="Get ready for production" />
           <div className="build-clusters">
             <div className="build-cluster build-cluster-modules">
-              <p className="build-cluster-label">To make it real, I need:</p>
+              <p className="build-cluster-label">To make it real, I need: <em className="time-chip">~4–5 hrs</em></p>
               <ul className="build-card-grid">
                 <li>Login &amp; auth</li>
                 <li>Database</li>
@@ -171,7 +171,7 @@ export default async function DeckPage({ searchParams }: PageProps) {
               </ul>
             </div>
             <div className="build-cluster">
-              <p className="build-cluster-label">A dozen services to wire up:</p>
+              <p className="build-cluster-label">A dozen services to wire up: <em className="time-chip">more hours</em></p>
               <ul className="build-card-grid build-card-grid-services">
                 <li>AWS</li>
                 <li>Supabase</li>
@@ -206,7 +206,7 @@ export default async function DeckPage({ searchParams }: PageProps) {
           <SlideTitle eyebrow="Running It" title="Go live, stay live" />
           <p className="lead">AI wrote the code. It can&apos;t run any of this:</p>
           <ul className="running-list">
-            <li><strong>Ship it</strong><span aria-hidden="true">—</span>App Store / Play Store review</li>
+            <li><strong>Ship it</strong><span aria-hidden="true">—</span>App Store / Play Store review <em className="time-chip">days to weeks</em></li>
             <li><strong>Market it</strong><span aria-hidden="true">—</span>channels, attribution</li>
             <li><strong>Keep it alive</strong><span aria-hidden="true">—</span>on-call, incident response</li>
             <li><strong>See how it&apos;s used</strong><span aria-hidden="true">—</span>observability, drop-off, bug reports</li>
@@ -218,48 +218,50 @@ export default async function DeckPage({ searchParams }: PageProps) {
           <p className="quiet-line">and the bills are already bleeding — opaque, priced for peak.</p>
         </section>
 
-        <section>
-          <SlideTitle eyebrow="Resolution" title="This is why we're building Crayon" />
-          <p className="lead">A platform for mini-apps, and a system that makes the whole lifecycle effortless.</p>
+        <section className="resolution-slide">
+          <SlideTitle eyebrow="Resolution" title="Crayon — an end-to-end platform for mini-apps" />
           <LifecyclePayoff />
-          <ul className="claim-card-grid">
+          <p className="feature-list-heading">What Crayon gives you:</p>
+          <ul className="feature-list">
             <li>
-              <p>Building gets easy — assemble, don&apos;t rebuild.</p>
+              <strong>Building, by assembly</strong>
+              <span aria-hidden="true">—</span>
+              pre-built, battle-tested modules: auth, database, storage, payments, notifications, hosting. AI assembles them, so you build only what&apos;s unique to your product.
             </li>
             <li>
-              <p>Running it disappears — it&apos;s one integrated platform.</p>
+              <strong>One integrated platform</strong>
+              <span aria-hidden="true">—</span>
+              every infrastructure service for running software, in one place: hosting, database, storage, observability, scaling, and more. One platform, one bill.
             </li>
             <li>
-              <p>Agents go beyond coding — the whole lifecycle is agent-operable.</p>
+              <strong>Agent capability beyond coding</strong>
+              <span aria-hidden="true">—</span>
+              the whole system is operable through our CLI, and your agent gets that access through our Skills. So your agent doesn&apos;t just write code — it runs the whole product: deploys, ops, monitoring, marketing, monetization, and more.
             </li>
           </ul>
-          <p className="quiet-line transition-line">All of this only works in one form factor.</p>
         </section>
 
         <section className="miniapp-slide">
           <SlideTitle eyebrow="Why Mini-Apps" title="Why mini-apps" />
-          <div className="miniapp-flow">
-            <div>
-              <h3>First, what is a mini-app?</h3>
-              <p>
-                A mini-app borrows its lifecycle from the platform. Not a smaller app — identity,
-                payments, hosting, distribution are all inherited. Open by link or QR code; no
-                download, no signup.
-              </p>
+          <p className="lead miniapp-bridge">All of this only works in one form factor. So why mini-apps?</p>
+          <div className="miniapp-grid">
+            <div className="miniapp-panel">
+              <h3>A mini-app borrows its lifecycle from the platform.</h3>
+              <ul className="miniapp-list">
+                <li>Not a smaller app. Identity, payments, hosting, distribution — all inherited</li>
+                <li>Open by link or QR code — no download, no signup, no onboarding</li>
+                <li>Most live on Crayon, but they don&apos;t have to — export to a standalone app any time</li>
+              </ul>
             </div>
-            <div>
-              <h3>It&apos;s how people will consume software now.</h3>
-              <p>
-                Film → YouTube → TikTok: every cheap-to-produce medium has shifted from active
-                search to passive arrival. Software is next — instant, contextual, often used once.
-              </p>
-            </div>
-            <div>
-              <h3>It unlocks the dark matter of software.</h3>
-              <p>
-                A whole category that never made sense to build before — too small. When the
-                platform absorbs the lifecycle and monetization, it can finally exist.
-              </p>
+            <div className="miniapp-panel miniapp-panel-primary">
+              <h3>How people consume software is going through a shift — proactive to passive.</h3>
+              <ul className="miniapp-list">
+                <li>For traditional software, we consume it proactively: search, read reviews, download, sign up, onboard — the whole process, before you get any value.</li>
+                <li>For any medium, when supply surges, consumption goes proactive → passive. Movies → YouTube &amp; Netflix → TikTok. AI makes software cheap, so software is entering the same shift.</li>
+                <li>So software now arrives as <strong>push</strong> — <strong>social</strong> (a friend in a group chat), <strong>influence</strong> (a creator you follow), <strong>contextual</strong> (a QR code on the table).</li>
+                <li>This happens 10–20 times a day. People don&apos;t anticipate searching, signing up, and onboarding each time.</li>
+                <li>What makes sense: one tap or scan, straight into the utility — the experience itself, no process in front of it.</li>
+              </ul>
             </div>
           </div>
           <p className="closing-line">Mini-apps are where developers meet consumers. Crayon is the infrastructure for that future.</p>
@@ -290,12 +292,12 @@ export default async function DeckPage({ searchParams }: PageProps) {
             <li>
               <strong>Developer CLI</strong>
               <span aria-hidden="true">—</span>
-              opens Crayon&apos;s infrastructure to developers: connect and run apps live
+              opens Crayon&apos;s infrastructure to developers: connect and run apps live (init, deploy, validate, observe — more to come)
             </li>
             <li>
               <strong>Crayon Skills</strong>
               <span aria-hidden="true">—</span>
-              teach agents the rules, and enable them to view, run, observe, and improve apps
+              teach the agent the rules (how to write code for Crayon, how to use the modules) and enable agents to view, run, observe, and improve apps on Crayon; installable to Claude Code, Codex, Cursor, OpenClaw
             </li>
           </ul>
         </section>
@@ -306,73 +308,89 @@ export default async function DeckPage({ searchParams }: PageProps) {
             <li>
               <strong>Multi-platform</strong>
               <span aria-hidden="true">—</span>
-              Android, Mac, PC, web; consistent UI and performance across every device
+              Android, Mac, PC, web; consistent UI and performance across every device (iOS live today)
             </li>
             <li>
               <strong>Whole-lifecycle access for agents</strong>
               <span aria-hidden="true">—</span>
-              deploy, validate, version, A/B test, observe, respond, distribute, support
+              we build the infrastructure that exposes the entire lifecycle, end to end, so any agent can operate it:
+              <ul>
+                <li>Build / ship side: deploy, validate, versioning, A/B testing</li>
+                <li>Run / operate side: ops, observability, incident response, distribution &amp; marketing, support</li>
+              </ul>
             </li>
             <li>
-              <strong>Local dev environment</strong>
+              <strong>Local workspace</strong>
               <span aria-hidden="true">—</span>
-              developers and agents can run, test, and verify rendering across devices
+              a full local environment for developers and agents: build, test, and a simulator to verify rendering across devices, plus a UI to operate your live apps directly. Our in-platform agent is available inside it.
             </li>
             <li>
-              <strong>Automatic review system</strong>
+              <strong>Automatic review system for publishing</strong>
               <span aria-hidden="true">—</span>
-              human + automated review before mini-apps go live
+              human + automated review of mini-apps before they go live; fast compared to App Store review
             </li>
             <li>
-              <strong>In-platform agent</strong>
+              <strong>Expand the module library</strong>
               <span aria-hidden="true">—</span>
-              for people who don&apos;t bring their own
+              today&apos;s modules cover the basics; we&apos;re broadening coverage so Crayon can build the large majority of apps, not just prototypes
             </li>
             <li>
               <strong>More</strong>
               <span aria-hidden="true">—</span>
-              modules, internal cross-mini-app distribution, more agent integrations
+              internal cross-mini-app distribution, more agent integrations
             </li>
           </ul>
         </section>
 
         <section className="raise-slide">
-          <SlideTitle eyebrow="Raise" title="Raising $10M seed" />
+          <SlideTitle eyebrow="Raise" title="Raising $10M" />
           <div className="raise-timeline">
             <div className="raise-phases">
               <div className="raise-phase raise-phase-build">
                 <span className="raise-phase-tick" aria-label="today">today</span>
                 <strong>Build</strong>
-                <span className="raise-phase-time">now → +6 mo</span>
+                <span className="raise-phase-time">~6 mo</span>
                 <span className="raise-phase-detail">infrastructure, modules, product</span>
               </div>
               <div className="raise-phase raise-phase-soft">
                 <strong>Soft launch</strong>
-                <span className="raise-phase-time">~+6 mo</span>
-                <span className="raise-phase-detail">quiet release; 2–3 mo to learn &amp; refine</span>
+                <span className="raise-phase-time">early next year</span>
+                <span className="raise-phase-detail">quiet release</span>
+              </div>
+              <div className="raise-phase raise-phase-watch">
+                <strong>Watch &amp; refine</strong>
+                <span className="raise-phase-time">2–3 mo</span>
+                <span className="raise-phase-detail">learn, validate, tune</span>
               </div>
               <div className="raise-phase raise-phase-public">
                 <strong>Public launch</strong>
-                <span className="raise-phase-time">~+9 mo</span>
-                <span className="raise-phase-detail">marketing &amp; collaborations, distribution, expansion</span>
+                <span className="raise-phase-time">expand</span>
+                <span className="raise-phase-detail">marketing &amp; collabs</span>
               </div>
               <div className="raise-phase raise-phase-seriesa">
                 <span className="raise-phase-tick" aria-label="Series A">Series A</span>
                 <strong>Series A</strong>
-                <span className="raise-phase-time">~+12 mo</span>
-                <span className="raise-phase-detail">scale on validated metrics</span>
+                <span className="raise-phase-time">milestone</span>
+                <span className="raise-phase-detail">raise on validation</span>
+              </div>
+              <div className="raise-phase raise-phase-enterprise" aria-label="enterprise horizon">
+                <strong>then: enterprise</strong>
+                <span className="raise-phase-time">horizon</span>
+                <span className="raise-phase-detail">after consumer proof</span>
               </div>
             </div>
             <div className="raise-runway-bracket" aria-label="approximately two years of runway">
               ~ two years of runway
             </div>
           </div>
+          <p className="feature-list-heading">How we&apos;ll spend it</p>
           <ul className="spend-list">
-            <li><strong>Engineering</strong><span aria-hidden="true">—</span>expand to 8 engineers across infrastructure, modules, and product</li>
+            <li><strong>Engineering</strong><span aria-hidden="true">—</span>expand the team to 8 engineers (infrastructure, modules, product)</li>
             <li><strong>Design, product, early marketing</strong><span aria-hidden="true">—</span>hiring now</li>
-            <li><strong>Infrastructure</strong><span aria-hidden="true">—</span>modest while we build; scales as the ecosystem grows</li>
-            <li><strong>Public launch</strong><span aria-hidden="true">—</span>developer relations, support, sales, marketing, distribution</li>
-            <li><strong>Essentials</strong><span aria-hidden="true">—</span>legal, accounting, operations</li>
+            <li><strong>Infrastructure</strong><span aria-hidden="true">—</span>modest while we build; scales up as the ecosystem grows</li>
+            <li><strong>At public launch</strong><span aria-hidden="true">—</span>developer relations, support, sales</li>
+            <li><strong>Marketing &amp; distribution</strong><span aria-hidden="true">—</span>budget kicks in at public launch, not before</li>
+            <li><strong>Plus the essentials</strong><span aria-hidden="true">—</span>legal, accounting, operations</li>
           </ul>
         </section>
 
@@ -383,12 +401,12 @@ export default async function DeckPage({ searchParams }: PageProps) {
             <li>
               <strong>Infrastructure</strong>
               <span aria-hidden="true">—</span>
-              freemium, grows with scale; database, storage, ops, observability, on-call, marketing services, and more
+              freemium, grows with scale. Free to start; builders pay as they grow. This isn&apos;t just hosting — it&apos;s the whole running-it layer: database, storage, ops, observability, on-call, marketing services, and more.
             </li>
             <li>
               <strong>Payments</strong>
               <span aria-hidden="true">—</span>
-              payments for builders plus our own built-in ad system
+              we enable payments for builders, plus our own built-in ad system — builders monetize from day one, and we share in it
             </li>
             <li>
               <strong>In-platform agent</strong>
@@ -396,7 +414,7 @@ export default async function DeckPage({ searchParams }: PageProps) {
               paid tier for builders who don&apos;t bring their own agent
             </li>
           </ul>
-          <p className="quiet-line transition-line">Revenue compounds with the ecosystem.</p>
+          <p className="quiet-line transition-line">Once we have the ecosystem, we earn from the whole lifecycle of every product on it.</p>
         </section>
 
         <section>
@@ -407,15 +425,15 @@ export default async function DeckPage({ searchParams }: PageProps) {
               <h3>Builders</h3>
               <ul className="tight-list">
                 <li>Vibe-coders who want a real product, not just a prototype</li>
-                <li>Agent access raises the ceiling on complexity and reliability</li>
+                <li>Agent access (not just a mobile builder UI) raises the ceiling on complexity and reliability</li>
                 <li>SMBs — restaurants, coffee shops, salons — we can build it for them with our agents</li>
-                <li>Influencers / creators — personal-brand apps to engage and monetize fans</li>
+                <li>Influencers / creators — personal-brand apps to engage and monetize their fans</li>
               </ul>
             </div>
             <div>
               <h3>Consumers</h3>
               <ul className="tight-list">
-                <li>Recreate popular small apps and games — free, instant, nostalgic</li>
+                <li>Recreate popular small apps &amp; games — free, instant, nostalgic</li>
                 <li>Use these to experiment with distribution and learn what drives virality</li>
                 <li>The loop: what works on our own apps becomes the playbook we hand to builders</li>
               </ul>
@@ -432,6 +450,32 @@ export default async function DeckPage({ searchParams }: PageProps) {
           <div className="dense-grid">
             <p>Engineering team from Midjourney, MIT, Stacked; part-time designer</p>
             <p>Backed by Afore Capital</p>
+          </div>
+        </section>
+
+        <section className="qa-slide">
+          <SlideTitle eyebrow="Appendix D" title="Q&A" />
+          <div className="qa-grid">
+            <article>
+              <h3>Mini-app vs. web app?</h3>
+              <p>Inheritance and retention. A web app starts cold every time; a mini-app inherits identity, payments, and the social graph from the platform — so multiplayer, rankings, and repeat use start warm, not from zero.</p>
+            </article>
+            <article>
+              <h3>Developer lock-in?</h3>
+              <p>No lock-in — export to a standalone app any time. The trade-off is losing one-tap access, unified identity, and the aggregated ecosystem. That distribution gravity is the real value.</p>
+            </article>
+            <article>
+              <h3>What about enterprise?</h3>
+              <p>Consumer first, enterprise later. Demand is real, but going there first would pull us into slow bespoke work before the core product is proven. We win outward, then sell inward.</p>
+            </article>
+            <article>
+              <h3>Why would capable developers use it?</h3>
+              <p>Knowing how to build and being able to run a product are different jobs. Crayon gives builders the whole running-it layer — ops, scaling, distribution, monetization — without becoming a team of one.</p>
+            </article>
+            <article className="qa-wide">
+              <h3>Why will software grow like other media?</h3>
+              <p>As building and running software gets cheap, niche tools that never made economic sense become viable. The market expands into the dark matter of specific, small-audience software.</p>
+            </article>
           </div>
         </section>
       </DeckRevealShell>
