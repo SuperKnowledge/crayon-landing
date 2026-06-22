@@ -1,6 +1,6 @@
 # Investor One-Pager
 
-**Crayon is a mini-app platform and ecosystem.** It's the infrastructure for everything past coding — hosting, distribution, monetization, the whole stack. Inside Crayon, AI doesn't write code from scratch — it assembles **production-ready, robust mini-apps** from a framework of pre-built modules. We're reimagining how software gets built for the AI era.
+**Crayon is an end-to-end mini-app platform and ecosystem.** It's the infrastructure for everything past coding — hosting, distribution, monetization, the whole stack. Inside Crayon, AI doesn't write code from scratch — it assembles **production-ready, robust mini-apps** from a framework of pre-built modules. We're reimagining how software gets built for the AI era.
 
 AI is changing coding dramatically. Everything else was built for a slower world — and **it's about to be flooded**.
 
