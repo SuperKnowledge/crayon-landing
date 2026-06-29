@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { cookies, headers } from "next/headers";
 import ClearDeckSessionOnLoad from "@/components/ClearDeckSessionOnLoad";
 import DeckLoginForm from "@/components/DeckLoginForm";
+import DisableContextMenu from "@/components/DisableContextMenu";
 import {
   DECK_AUTH_COOKIE,
   shouldPersistDeckSession,
@@ -59,7 +60,9 @@ export default async function OnePagerPage() {
   return (
     <main className="one-pager-page">
       <ClearDeckSessionOnLoad enabled={!shouldPersistDeckSession()} />
+      <DisableContextMenu />
       <article className="one-pager-document">
+        <p className="one-pager-confidential">Confidential · Do not distribute</p>
         {renderSimpleMarkdown(markdown)}
       </article>
     </main>
