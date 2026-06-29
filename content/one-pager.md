@@ -4,7 +4,7 @@
 
 AI is changing coding dramatically. Everything else was built for a slower world — and **it's about to be flooded**.
 
-**The way software gets built is broken.** More than 95% of the code in any app is the same plumbing every app needs — auth, payments, storage, the rest. Writing it from scratch every time is a waste of time and tokens, and it's a gamble on the model's intelligence level, with reliability and security at risk. Then, shipping past a prototype means wiring up a dozen separate tools — AWS, Stripe, Auth0, Sentry, App Store — each its own account, dashboard, and learning curve. None are cheap, the pricing is opaque, and it only grows as you scale. A weekend side project quietly becomes a dozen bills that eat half your paycheck. Engineers have always tolerated this; the new builders AI unlocked **don't stand a chance**.
+**The way software gets built is broken.** 95% of the code in any app is the same plumbing every app needs — auth, payments, storage, the rest. Writing it from scratch every time is a waste of time and tokens, and it's a gamble on the model's intelligence level, with reliability and security at risk. Then, shipping past a prototype means wiring up a dozen separate tools — AWS, Stripe, Auth0, Sentry, App Store — each its own account, dashboard, and learning curve. None are cheap, the pricing is opaque, and it only grows as you scale. A weekend side project quietly becomes a dozen bills that eat half your paycheck. Engineers have always tolerated this; the new builders AI unlocked **don't stand a chance**.
 
 **Shipping the code is barely the start.** Getting something working is maybe 10% of a product's life. The rest is everything no one warns you about: App Store review, marketing, attribution, on-call when it breaks at 3am, watching how people actually use it, scaling when they show up, fixing and shipping again, support, payments. None of it is optional, none of it ends, and none of it is something AI can hand back to you finished. It still takes a team, or it takes you, every day. **AI democratized coding, but not software** — everything past the code is still fragmented, manual, and relentless. That's the wall every new builder hits.
 
@@ -12,11 +12,11 @@ AI is changing coding dramatically. Everything else was built for a slower world
 
 **That's why we're building Crayon.**
 
-- A framework of battle-tested building modules — database, storage, authentication, payments, notifications, and more — so AI assembles each app from proven parts instead of rewriting the plumbing every time.
-- One platform, one bill, shared infrastructure purpose-built for AI to manage directly. No DevOps knowledge needed, and unit costs are significantly lower and more predictable.
-- The whole lifecycle is agent-operable. Crayon installs into the agent you already use, so it doesn't just write the code — it deploys, observes, scales, markets, and improves the app. The work that used to need a whole team is now something an agent can run.
-- Built-in ad system lets builders monetize user attention from day one. By aggregating demand across the entire ecosystem, even small mini-apps get the kind of access that used to require Google or Meta scale.
-- One mini-app, every device — unified identity, instant load, no install. One tap from a group chat, social feed, or QR code brings users straight into a live mini-app.
+- A framework of battle-tested building modules — database, storage, authentication, payments, notifications, and more — so AI assembles each app from proven parts instead of rewriting the plumbing every time, and every app runs across iOS, Android, Mac, and web.
+- One platform, one bill, with all the infrastructure for running software integrated rather than fragmented across a dozen vendors — hosting, database, observability, scaling, on-call, distribution, monetization, and everything else operating software demands. Lower, more predictable cost, and more reliable by default.
+- The whole lifecycle is agent-operable. Crayon exposes the entire system through a CLI and installs as Skills into the agent you already use — so that same agent's capability expands beyond coding to running the live product: it deploys, observes, scales, markets, and improves the app. The work that used to need a whole team is now something an agent can run.
+- Built-in monetization from day one — we power payments inside every mini-app and run our own ad system. By aggregating demand across the entire ecosystem, even small mini-apps get the kind of reach that used to require Google or Meta scale.
+- For consumers: no install, no signup, unified identity — one tap from a group chat, social feed, or QR code drops you straight into a live mini-app.
 
 **AI democratized coding. Crayon democratizes the rest.**
 
@@ -26,4 +26,4 @@ AI is changing coding dramatically. Everything else was built for a slower world
 
 **Raising.** $10M seed.
 
-**Contact.** [tony@crayon-ai.com](mailto:tony@crayon-ai.com) · [Demo](https://crayon-ai.com/demo)
+**Contact.** [tony@crayon-ai.com](mailto:tony@crayon-ai.com)
