@@ -1445,19 +1445,29 @@
 .gtm-grid {
   display: grid;
   max-width: 61rem;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 2rem;
-  margin-top: 1.2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+  margin-top: 0.95rem;
 }
 
-.gtm-grid h3 {
+.gtm-column {
+  min-width: 0;
+  padding-left: 0.95rem;
+  border-left: 1px solid var(--deck-rule);
+}
+
+.gtm-column-builders {
+  border-left-color: rgba(247, 117, 29, 0.42);
+}
+
+.gtm-column h3 {
   display: flex;
   align-items: baseline;
   gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  margin: 0 0 0.55rem;
 }
 
-.gtm-grid h3::before {
+.gtm-column h3::before {
   content: "";
   flex: 0 0 auto;
   width: 0.48em;
@@ -1468,7 +1478,64 @@
 }
 
 .gtm-grid .tight-list {
+  gap: 0.62em;
   margin-top: 0;
+}
+
+.gtm-grid .tight-list > li {
+  font-size: 1.04rem;
+  line-height: 1.32;
+}
+
+.gtm-grid .tight-list > li > strong {
+  font-weight: 820;
+}
+
+.gtm-grid .tight-list ul {
+  display: grid;
+  gap: 0.34rem;
+  margin: 0.48rem 0 0.08rem;
+  border-left: 1px solid rgba(247, 117, 29, 0.28);
+  padding: 0 0 0 0.7rem;
+  list-style: none;
+}
+
+.gtm-grid .tight-list > li:has(ul)::before {
+  background: var(--deck-red);
+}
+
+.gtm-grid .tight-list li li {
+  padding-left: 0.95rem;
+  color: #2b2722;
+  font-size: 0.98rem !important;
+  line-height: 1.3 !important;
+}
+
+.gtm-grid .tight-list li li::before {
+  top: 0.5em;
+  width: 0.36em;
+  height: 0.36em;
+  background: var(--deck-orange);
+}
+
+.gtm-example-strip {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.65rem;
+  margin-top: 0.1rem;
+  border-top: 1px solid rgba(245, 184, 68, 0.7);
+  padding: 0.58rem 0 0;
+  color: #2b2722;
+  font-size: 1rem;
+  line-height: 1.28;
+}
+
+.gtm-example-strip strong {
+  color: var(--deck-ink);
+  font-weight: 820;
+  white-space: nowrap;
 }
 
 .team-card {

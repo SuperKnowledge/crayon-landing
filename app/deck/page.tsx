@@ -268,7 +268,7 @@ export default async function DeckPage({ searchParams }: PageProps) {
         </section>
 
         <section className="title-only-slide">
-          <h2>Demo</h2>
+          <h2>Live demo time!</h2>
         </section>
 
         <section>
@@ -401,42 +401,58 @@ export default async function DeckPage({ searchParams }: PageProps) {
             <li>
               <strong>Infrastructure</strong>
               <span aria-hidden="true">—</span>
-              freemium, grows with scale. Free to start; builders pay as they grow. This isn&apos;t just hosting — it&apos;s the whole running-it layer: database, storage, ops, observability, on-call, marketing services, and more.
+              freemium, grows with scale. Free to start; builders pay as they grow. This isn&apos;t just hosting — it&apos;s the whole running-it layer: database, storage, ops, observability, on-call, marketing services, and more. Shared infrastructure keeps marginal cost low and builder bills predictable.
             </li>
             <li>
-              <strong>Payments</strong>
+              <strong>Payments and ads</strong>
               <span aria-hidden="true">—</span>
-              we enable payments for builders, plus our own built-in ad system — builders monetize from day one, and we share in it
+              payments inside mini-apps with a transaction fee on every transaction; built-in ads builders can turn on, with Crayon sharing in what they earn.
             </li>
             <li>
               <strong>In-platform agent</strong>
               <span aria-hidden="true">—</span>
-              paid tier for builders who don&apos;t bring their own agent
+              paid tier for builders who don&apos;t bring their own agent to run build and operations.
             </li>
           </ul>
-          <p className="quiet-line transition-line">Once we have the ecosystem, we earn from the whole lifecycle of every product on it.</p>
+          <p className="quiet-line transition-line">Once we have the ecosystem, revenue compounds with the lifecycle of every product on it.</p>
         </section>
 
         <section>
           <SlideTitle eyebrow="Appendix B" title="Go-to-market" />
-          <p className="lead">Not chicken-and-egg — we go after both ends at once.</p>
+          <p className="lead">It&apos;s not chicken-and-egg. We go after both ends at once.</p>
           <div className="gtm-grid">
-            <div>
+            <div className="gtm-column gtm-column-builders">
               <h3>Builders</h3>
               <ul className="tight-list">
-                <li>Vibe-coders who want a real product, not just a prototype</li>
-                <li>Agent access (not just a mobile builder UI) raises the ceiling on complexity and reliability</li>
-                <li>SMBs — restaurants, coffee shops, salons — we can build it for them with our agents</li>
-                <li>Influencers / creators — personal-brand apps to engage and monetize their fans</li>
+                <li>
+                  <strong>The best place to build for this era</strong>
+                  <span aria-hidden="true">—</span>
+                  and here&apos;s why:
+                  <ul>
+                    <li>Faster to build, cheaper to run, reliable by default — production-ready, not a prototype</li>
+                    <li>Comes with everything after the build — you don&apos;t connect to any other services; hosting, ops, distribution, monetization are all here</li>
+                    <li>Agent access raises the ceiling — not just a mobile builder UI; your own agent operates it, so complexity and reliability go up</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Or we build and run it for you</strong>
+                  <span aria-hidden="true">—</span>
+                  for SMBs and creators; you just manage and distribute it. They bring their own customers — which brings new users to Crayon.
+                </li>
               </ul>
             </div>
-            <div>
+            <div className="gtm-column">
               <h3>Consumers</h3>
               <ul className="tight-list">
-                <li>Recreate popular small apps &amp; games — free, instant, nostalgic</li>
-                <li>Use these to experiment with distribution and learn what drives virality</li>
-                <li>The loop: what works on our own apps becomes the playbook we hand to builders</li>
+                <li><strong>Download Crayon once</strong><span aria-hidden="true">—</span>whatever app first brings someone in, they never download again; every other mini-app opens inside it</li>
+                <li><strong>We seed it ourselves</strong><span aria-hidden="true">—</span>recreate popular small apps and games, free and nostalgic, made to play and interact with your friends</li>
+                <li><strong>Anchor on social entertainment</strong><span aria-hidden="true">—</span>things you do with friends, so they carry a built-in network effect: every player pulls in their circle</li>
+                <li><strong>We learn what spreads</strong><span aria-hidden="true">—</span>we run our own marketing on these apps, find what works, and hand that distribution playbook to builders</li>
               </ul>
+            </div>
+            <div className="gtm-example-strip">
+              <strong>30-day challenge</strong>
+              <span>recreate one popular app/game a day in ~20 min, show how Crayon works, then post “try it here” to Twitter / IG / TikTok — and anyone can try building it themselves.</span>
             </div>
           </div>
         </section>
