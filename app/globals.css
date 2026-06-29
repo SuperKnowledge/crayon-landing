@@ -7,8 +7,8 @@
 @layer base {
   :root {
     --font-inter: 'Inter', sans-serif;
-    --font-space: 'Space Grotesk', monospace;
-    
+
+
     /* Clean color palette - mostly monochrome with accent colors */
     --color-background: 10 10 10;
     --color-foreground: 250 250 250;
@@ -71,9 +71,9 @@
   }
   .waitlist-form .submit-btn { position: absolute; right: 0.5rem; }
   
-  /* Custom font utilities */
+  /* .font-display retired — Space Grotesk dropped. Inter inherits for any legacy uses. */
   .font-display {
-    font-family: var(--font-space);
+    font-family: var(--font-inter);
   }
 }
 
@@ -93,13 +93,13 @@
       0 0 40px rgba(var(--color-glow), 0.2);
   }
   
-  /* Gradient text */
+  /* Gradient text — brand red → orange → yellow */
   .gradient-text {
     background-image: linear-gradient(
       to right,
-      rgb(var(--color-accent-1)),
-      rgb(var(--color-accent-2)),
-      rgb(var(--color-accent-3))
+      #e8402a,
+      #f7751d,
+      #f6c019
     );
     -webkit-background-clip: text;
     background-clip: text;
@@ -275,6 +275,12 @@
   background: #fbfaf7;
   color: #171717;
   padding: 4rem 1.5rem;
+}
+
+.landing-page {
+  min-height: 100svh;
+  background: #fbfaf7;
+  color: #171717;
 }
 
 .one-pager-document {

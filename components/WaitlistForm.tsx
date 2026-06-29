@@ -67,22 +67,22 @@ export default function WaitlistForm() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
             disabled={status === "loading" || status === "success"}
-            className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-full 
-                     text-white placeholder-white/40 transition-all duration-300
-                     focus:outline-none focus:border-[rgb(var(--color-accent-2))]/50
-                     focus:bg-white/10 focus:shadow-lg focus:shadow-[rgb(var(--color-accent-2))]/20
+            className="w-full px-6 py-4 bg-white border border-[#d7d3ca] rounded-full
+                     text-[#171717] placeholder-[#a8a39a] transition-all duration-300
+                     focus:outline-none focus:border-[#f7751d]
+                     focus:shadow-lg focus:shadow-[#f7751d]/20
                      disabled:opacity-50 disabled:cursor-not-allowed
-                     backdrop-blur-sm waitlist-input"
+                     waitlist-input"
             required
           />
-          
+
           <button
             type="submit"
             disabled={status === "loading" || status === "success" || !email}
-            className="absolute right-2 top-1/2 -translate-y-1/2 h-10 px-5 
-                     bg-gradient-to-r from-[rgb(var(--color-accent-1))] to-[rgb(var(--color-accent-2))]
+            className="absolute right-2 top-1/2 -translate-y-1/2 h-10 px-5
+                     bg-gradient-to-r from-[#e8402a] to-[#f7751d]
                      text-white font-medium rounded-full transition-all duration-300
-                     hover:shadow-lg hover:shadow-[rgb(var(--color-accent-2))]/30
+                     hover:shadow-lg hover:shadow-[#f7751d]/30
                      hover:scale-105 active:scale-95 z-10
                      disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 submit-btn"
           >
@@ -105,11 +105,11 @@ export default function WaitlistForm() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             className={`mt-3 text-center text-sm ${
-              status === "success" 
-                ? "text-green-400" 
-                : status === "error" 
-                ? "text-red-400" 
-                : "text-white/60"
+              status === "success"
+                ? "text-[#16a34a]"
+                : status === "error"
+                ? "text-[#b91c1c]"
+                : "text-[#68635b]"
             }`}
           >
             {message}
