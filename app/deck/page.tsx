@@ -171,7 +171,7 @@ export default async function DeckPage({ searchParams }: PageProps) {
               </ul>
             </div>
             <div className="build-cluster">
-              <p className="build-cluster-label">A dozen services to wire up: <em className="time-chip">more hours</em></p>
+              <p className="build-cluster-label">A dozen services to wire up: <em className="time-chip">more hours + $$$</em></p>
               <ul className="build-card-grid build-card-grid-services">
                 <li>AWS</li>
                 <li>Supabase</li>
@@ -185,10 +185,10 @@ export default async function DeckPage({ searchParams }: PageProps) {
               <ul className="build-card-grid build-card-grid-platforms">
                 <li>iOS</li>
                 <li>Android</li>
-                <li>Mac</li>
-                <li>PC</li>
                 <li>web</li>
-                <li>every screen size</li>
+                <li>screen sizes</li>
+                <li>OS versions</li>
+                <li>languages</li>
               </ul>
             </div>
           </div>
