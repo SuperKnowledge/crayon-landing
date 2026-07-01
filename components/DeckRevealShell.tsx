@@ -7,12 +7,14 @@ type DeckRevealShellProps = {
   children: React.ReactNode;
   clearSessionOnLoad: boolean;
   exportHref?: string | null;
+  showConfidential?: boolean;
 };
 
 export default function DeckRevealShell({
   children,
   clearSessionOnLoad,
   exportHref,
+  showConfidential = true,
 }: DeckRevealShellProps) {
   const revealRef = useRef<HTMLDivElement>(null);
   const deckRef = useRef<RevealApi | null>(null);
@@ -122,6 +124,9 @@ export default function DeckRevealShell({
 
   return (
     <div className="deck-shell">
+      {showConfidential ? (
+        <p className="deck-confidential">Confidential · Do not distribute</p>
+      ) : null}
       {exportHref ? (
         <a className="deck-export-button" href={exportHref} target="_blank" rel="noreferrer">
           Export PDF

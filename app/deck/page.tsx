@@ -125,7 +125,11 @@ export default async function DeckPage({ searchParams }: PageProps) {
 
   return (
     <main className="deck-page">
-      <DeckRevealShell exportHref={deckExportHref} clearSessionOnLoad={!shouldPersistDeckSession()}>
+      <DeckRevealShell
+        exportHref={deckExportHref}
+        clearSessionOnLoad={!shouldPersistDeckSession()}
+        showConfidential={!deckExportHref}
+      >
         <section className="cover-slide">
           <Image
             className="cover-logo"
