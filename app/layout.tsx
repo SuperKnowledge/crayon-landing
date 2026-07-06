@@ -9,14 +9,25 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Crayon - Create Your Own Apps",
-  description: "Vibe only, no code. Build mini apps for yourself and people you care about.",
-  keywords: "no-code, app builder, creative, social apps, mini apps",
+  title: "Crayon | The infrastructure for software in the AI era",
+  description:
+    "Crayon is a mini-app platform and ecosystem — the infrastructure for everything past coding: assembly, hosting, distribution, and monetization.",
+  keywords:
+    "mini-app platform, AI infrastructure, software infrastructure, developer platform, mini apps",
   authors: [{ name: "Crayon AI, Inc." }],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+  },
   openGraph: {
-    title: "Crayon - Create Your Own Apps",
-    description: "Vibe only, no code.",
+    title: "Crayon | The infrastructure for software in the AI era",
+    description:
+      "A mini-app platform and ecosystem — the infrastructure for everything past coding.",
     type: "website",
+    siteName: "Crayon",
   },
 };
 
