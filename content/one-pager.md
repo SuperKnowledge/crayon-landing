@@ -24,6 +24,6 @@ AI is changing coding dramatically. Everything else was built for a slower world
 
 **Team.** [Tony Zhang](https://www.linkedin.com/in/tonyzhanghm), founder — MSML, CMU '22; previously ML researcher at Scale AI and Microsoft, and worked on SuperKnowledge. Engineering team from Midjourney, MIT, and Stacked.
 
-**Raising.** $10M seed.
+**Raising.** $8M seed.
 
 **Contact.** [tony@crayon-ai.com](mailto:tony@crayon-ai.com)
