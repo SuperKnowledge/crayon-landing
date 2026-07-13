@@ -347,7 +347,7 @@ export default async function DeckPage({ searchParams }: PageProps) {
         </section>
 
         <section className="raise-slide">
-          <SlideTitle eyebrow="Raise" title="Raising $8M" />
+          <SlideTitle eyebrow="Raise" title="Raising $6M" />
           <div className="raise-timeline">
             <div className="raise-phases">
               <div className="raise-phase raise-phase-build">
